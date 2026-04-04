@@ -3,7 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FreshSave Mobile Prototype</title>
+  <title>FreshSave - Smart Grocery Savings</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#e4c47b',
+            accent: '#4a4a4a',
+            bgMain: '#FCF8D5',
+            cardBg: '#FFFFFF',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          borderRadius: {
+            custom: '24px',
+          }
+        }
+      }
+    }
+  </script>
   <style>
     :root{
       --bg:#FFF8D8;
@@ -149,12 +175,9 @@
 
     .content{
       flex:1;
-      overflow-y:auto;
-      overflow-x:hidden;
+      overflow:auto;
       padding:18px 18px 100px;
       scroll-behavior:smooth;
-      background:linear-gradient(180deg, #FFFBEA 0%, #FFF4C7 100%);
-      overscroll-behavior:contain;
     }
 
     .section{display:none}
@@ -293,7 +316,6 @@
 
     .chip:active{
       transform:translateY(0px);
-      background:linear-gradient(145deg,#FFE79F,#FFD773);
     }
 
     .chip.active{
@@ -333,22 +355,34 @@
     }
 
     .thumb{
-      width:66px;
-      height:66px;
-      border-radius:18px;
-      background:linear-gradient(145deg, #FFF7CE, #FFE7A9);
-      display:grid;
-      place-items:center;
-      font-size:32px;
-      flex:0 0 auto;
+      width:90px;
+      height:90px;
+      border-radius:22px;
       overflow:hidden;
+      position:relative;
+      flex:0 0 auto;
+      box-shadow:0 10px 18px rgba(0,0,0,.08);
     }
 
-    .thumb img{
+    .thumb-img{
       width:100%;
       height:100%;
       object-fit:cover;
-      border-radius:18px;
+      display:block;
+    }
+
+    .thumb-emoji{
+      position:absolute;
+      top:8px;
+      right:8px;
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,0.85);
+      border-radius:12px;
+      font-size:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
     }
 
     .deal-main{flex:1; min-width:0}
@@ -375,10 +409,9 @@
     .price-row{
       display:flex;
       align-items:center;
-      gap:6px;
+      gap:8px;
       margin-top:10px;
-      flex-wrap:nowrap;
-      overflow:hidden;
+      flex-wrap:wrap;
     }
 
     .price-now{
@@ -396,20 +429,15 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:6px 11px;
+      padding:7px 10px;
       border-radius:999px;
-      font-size:12px;
+      font-size:11px;
       font-weight:800;
     }
 
-    /* Discount badges: deep coral-red — attractive, pops on cream */
-    .badge.warn,
-    .badge.ok,
-    .badge.soft {
-      background:linear-gradient(145deg,#FF5A5A,#E0202E);
-      color:#fff;
-      letter-spacing:0.02em;
-    }
+    .badge.warn{ background:#FBE0D6; color:#9A4F39; }
+    .badge.ok{ background:#E6F6E6; color:#3C7A46; }
+    .badge.soft{ background:#FFF2BF; color:#725B0E; }
 
     .grid-2{
       display:grid;
@@ -657,14 +685,6 @@
       background:linear-gradient(145deg, #FFF7C8, #FFE39E);
       font-size:38px;
       flex:0 0 auto;
-      overflow:hidden;
-    }
-
-    .sheet-image img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      border-radius:24px;
     }
 
     .sheet-top h2{
@@ -963,30 +983,25 @@
     }
 
     .btn-add-basket{
-      background:linear-gradient(145deg,#22A84A,#167A33);
+      background:linear-gradient(145deg, #5E9A64, #4A7A52);
       color:#fff;
       border:none;
-      border-radius:999px;
-      padding:4px 10px;
+      border-radius:12px;
+      padding:8px 12px;
       font:inherit;
-      font-weight:800;
+      font-weight:700;
       cursor:pointer;
-      font-size:11px;
-      white-space:nowrap;
-      flex-shrink:0;
-      line-height:1.4;
+      font-size:12px;
       transition:all .2s ease;
-      box-shadow:0 2px 8px rgba(22,122,51,.35);
     }
 
     .btn-add-basket:hover{
-      background:linear-gradient(145deg,#28C254,#1A9140);
-      transform:scale(1.04);
-      box-shadow:0 4px 14px rgba(22,122,51,.5);
+      transform:scale(1.05);
+      box-shadow:0 4px 12px rgba(94, 154, 100, 0.3);
     }
 
     .btn-add-basket:active{
-      transform:scale(0.97);
+      transform:scale(0.98);
     }
 
     .checkout-modal{
@@ -1047,22 +1062,6 @@
 
     .checkout-item-emoji{
       font-size:24px;
-      width:44px;
-      height:44px;
-      border-radius:12px;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex:0 0 auto;
-      background:linear-gradient(145deg, #FFF7CE, #FFE7A9);
-    }
-
-    .checkout-item-emoji img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      border-radius:12px;
     }
 
     .checkout-item-details{
@@ -1403,389 +1402,6 @@
       font-weight:800;
     }
 
-    /* Location picker styles */
-    .branch-pill{
-      padding:10px 12px;
-      background:rgba(255,255,255,.65);
-      border:1px solid rgba(130,110,39,.12);
-      border-radius:16px;
-      font-size:12px;
-      font-weight:700;
-      white-space:nowrap;
-      cursor:pointer;
-      transition:all .2s ease;
-      user-select:none;
-    }
-
-    .branch-pill:hover{
-      background:rgba(255,255,255,.9);
-      border-color:rgba(130,110,39,.3);
-      transform:translateY(-1px);
-      box-shadow:0 4px 12px rgba(0,0,0,.08);
-    }
-
-    .location-modal{
-      position:absolute;
-      inset:0;
-      background:rgba(50,39,9,.4);
-      backdrop-filter:blur(5px);
-      display:none;
-      align-items:flex-end;
-      z-index:30;
-    }
-
-    .location-modal.open{ display:flex; }
-
-    .location-sheet{
-      width:100%;
-      max-height:92%;
-      background:linear-gradient(180deg,#FFFDF2 0%,#FFF5CA 100%);
-      border-radius:30px 30px 0 0;
-      padding:18px 18px 32px;
-      overflow:auto;
-      box-shadow:0 -18px 45px rgba(50,39,9,.2);
-    }
-
-    .location-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:16px;
-    }
-
-    .location-header h3{ margin:0; font-size:18px; }
-
-    .location-close{
-      background:none;
-      border:none;
-      font-size:20px;
-      cursor:pointer;
-      color:var(--muted);
-      transition:transform .2s;
-      padding:4px;
-    }
-
-    .location-close:hover{ transform:scale(1.2); }
-
-    .locate-me-btn{
-      width:100%;
-      padding:14px;
-      border:2px dashed rgba(130,110,39,.3);
-      border-radius:18px;
-      background:rgba(255,255,255,.6);
-      font:inherit;
-      font-size:14px;
-      font-weight:700;
-      color:var(--text);
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      transition:all .2s ease;
-      margin-bottom:18px;
-    }
-
-    .locate-me-btn:hover{
-      background:rgba(255,255,255,.9);
-      border-color:var(--accent);
-      transform:translateY(-2px);
-      box-shadow:0 6px 16px rgba(232,184,78,.2);
-    }
-
-    .locate-me-btn:active{ transform:translateY(0); }
-
-    .branch-group-label{
-      font-size:11px;
-      font-weight:800;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin:0 0 10px;
-    }
-
-    .branch-item{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      padding:14px;
-      border-radius:18px;
-      background:rgba(255,255,255,.65);
-      border:2px solid transparent;
-      cursor:pointer;
-      transition:all .2s ease;
-      margin-bottom:10px;
-    }
-
-    .branch-item:hover{
-      background:rgba(255,255,255,.9);
-      border-color:rgba(232,184,78,.4);
-      transform:translateY(-2px);
-      box-shadow:0 6px 16px rgba(110,90,18,.08);
-    }
-
-    .branch-item.selected{
-      border-color:var(--accent);
-      background:rgba(255,233,130,.18);
-    }
-
-    .branch-icon{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      background:linear-gradient(145deg,#FFE694,#FFD877);
-      display:grid;
-      place-items:center;
-      font-size:20px;
-      flex:0 0 auto;
-    }
-
-    .branch-info{ flex:1; min-width:0; }
-
-    .branch-name{
-      font-weight:800;
-      font-size:14px;
-      margin-bottom:3px;
-    }
-
-    .branch-address{
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.35;
-    }
-
-    .branch-distance{
-      font-size:12px;
-      font-weight:700;
-      color:var(--accent);
-      white-space:nowrap;
-    }
-
-    .branch-check{
-      width:22px;
-      height:22px;
-      border-radius:50%;
-      background:var(--accent);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      font-size:13px;
-      color:#5F4A10;
-      flex:0 0 auto;
-    }
-
-    .branch-item.selected .branch-check{ display:flex; }
-
-    .locating-spinner{
-      display:inline-block;
-      width:16px;
-      height:16px;
-      border:2px solid rgba(76,68,32,.2);
-      border-top-color:var(--accent);
-      border-radius:50%;
-      animation:spin .7s linear infinite;
-      vertical-align:middle;
-    }
-
-    @keyframes spin{ to{ transform:rotate(360deg); } }
-
-    /* Deals of the Day / Promo Cards */
-    .promo-scroll{
-      display:flex;
-      gap:12px;
-      overflow-x:auto;
-      padding-bottom:6px;
-      margin-bottom:4px;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-    }
-    .promo-scroll::-webkit-scrollbar{ display:none; }
-
-    .promo-card{
-      flex:0 0 210px;
-      height:152px;
-      border-radius:22px;
-      padding:14px 16px;
-      position:relative;
-      overflow:hidden;
-      scroll-snap-align:start;
-      box-shadow:0 8px 22px rgba(0,0,0,.15);
-      cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease;
-      display:flex;
-      flex-direction:column;
-      color:#fff;
-    }
-    /* Each card gets its own vivid colour */
-    .promo-card.yellow { background:linear-gradient(145deg,#FFE94C,#FFD000); }
-    .promo-card.green  { background:linear-gradient(145deg,#56C596,#2EAA73); }
-    .promo-card.orange { background:linear-gradient(145deg,#FF6B6B,#E63950); }
-    .promo-card.blue   { background:linear-gradient(145deg,#4ECDC4,#1A9E96); }
-    .promo-card.yellow .promo-title { color:#3D2B00; }
-    .promo-card.yellow .promo-sub   { color:#5A4000; }
-    .promo-card.yellow .promo-tag,
-    .promo-card.yellow .promo-cta   { color:#3D2B00; }
-    .promo-card.yellow               { color:#3D2B00; }
-    .promo-card:hover{ transform:translateY(-3px); box-shadow:0 14px 32px rgba(0,0,0,.22); }
-
-    .promo-tag{
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-      padding:3px 9px;
-      background:rgba(255,255,255,.28);
-      border-radius:999px;
-      font-size:10px;
-      font-weight:800;
-      color:#fff;
-      margin-bottom:7px;
-      width:fit-content;
-    }
-
-    .promo-title{
-      font-size:14px;
-      font-weight:900;
-      line-height:1.2;
-      margin:0 0 4px;
-      color:#fff;
-      flex:1;
-    }
-
-    .promo-sub{
-      font-size:10px;
-      line-height:1.4;
-      color:rgba(255,255,255,.88);
-      margin:0 0 8px;
-    }
-
-    .promo-cta{
-      display:inline-flex;
-      align-items:center;
-      padding:5px 11px;
-      background:rgba(255,255,255,.28);
-      border-radius:999px;
-      font-size:11px;
-      font-weight:800;
-      color:#fff;
-      width:fit-content;
-    }
-
-    .promo-deco{
-      position:absolute;
-      right:-10px;
-      bottom:-8px;
-      font-size:58px;
-      opacity:.18;
-      pointer-events:none;
-      line-height:1;
-    }
-
-    /* Branch promo tag */
-    .branch-promo{
-      font-size:11px;
-      font-weight:700;
-      color:var(--success);
-      background:rgba(94,154,100,.1);
-      border-radius:999px;
-      padding:3px 9px;
-      display:inline-flex;
-      align-items:center;
-      gap:4px;
-      margin-top:5px;
-    }
-
-    /* Live deals ticker */
-    .live-ticker{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      background:rgba(255,255,255,.55);
-      border:1px solid rgba(137,116,34,.12);
-      border-radius:999px;
-      padding:8px 14px;
-      font-size:12px;
-      font-weight:700;
-      color:var(--text);
-      margin-bottom:12px;
-    }
-    .ticker-dot{
-      width:8px; height:8px; border-radius:50%;
-      background:#D87752; flex:0 0 auto;
-      animation:livePulse 1.4s ease-in-out infinite;
-    }
-    @keyframes livePulse{
-      0%,100%{ opacity:1; transform:scale(1); box-shadow:0 0 0 0 rgba(216,119,82,.5); }
-      50%{ opacity:.85; transform:scale(1.25); box-shadow:0 0 0 5px rgba(216,119,82,0); }
-    }
-
-    /* Smooth deal card filter transitions */
-    .deal-card{
-      transition:transform .18s ease, box-shadow .18s ease, opacity .22s ease;
-    }
-    .deal-card.hiding{
-      opacity:0; transform:scale(0.96) translateY(6px); pointer-events:none;
-    }
-
-    /* Promo code input section */
-    .promo-code-section{
-      background:linear-gradient(145deg,#FFF8D8,#FFF3BE);
-      border:1px dashed rgba(137,116,34,.3);
-      border-radius:16px;
-      padding:14px;
-      margin-bottom:14px;
-    }
-    .promo-code-label{
-      font-size:12px;
-      font-weight:800;
-      color:var(--muted);
-      text-transform:uppercase;
-      letter-spacing:.05em;
-      margin-bottom:8px;
-    }
-    .promo-code-row{
-      display:flex;
-      gap:8px;
-    }
-    .promo-code-input{
-      flex:1;
-      border:1.5px solid rgba(137,116,34,.2);
-      border-radius:12px;
-      padding:9px 12px;
-      font:inherit;
-      font-size:13px;
-      font-weight:700;
-      color:var(--text);
-      background:rgba(255,255,255,.8);
-      outline:none;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      transition:border-color .2s;
-    }
-    .promo-code-input:focus{ border-color:var(--accent); }
-    .promo-code-btn{
-      background:linear-gradient(145deg,#FFE39A,#F4C84A);
-      color:#5F4A10;
-      border:none;
-      border-radius:12px;
-      padding:9px 16px;
-      font:inherit;
-      font-size:13px;
-      font-weight:800;
-      cursor:pointer;
-      transition:all .2s;
-      white-space:nowrap;
-    }
-    .promo-code-btn:hover{ transform:translateY(-1px); box-shadow:0 4px 12px rgba(232,184,78,.35); }
-    .promo-code-btn:active{ transform:translateY(0); }
-    .promo-code-msg{
-      font-size:12px;
-      font-weight:700;
-      margin-top:7px;
-      min-height:16px;
-    }
-    .promo-code-msg.ok{ color:var(--success); }
-    .promo-code-msg.err{ color:var(--danger); }
-
     @media (max-width:420px){
       body{padding:0}
       .phone-shell{
@@ -1814,7 +1430,7 @@
               🛒
               <span class="basket-count" id="basketCount" style="display:none;">0</span>
             </div>
-            <div class="branch-pill" id="branchPill" onclick="openLocationModal()">📍 <span id="branchPillText">Rama 1 Branch</span> ▾</div>
+            <div class="branch-pill">📍 Rama 1 Branch</div>
           </div>
         </div>
         <div class="search-bar-wrapper" id="searchBarWrapper">
@@ -1850,50 +1466,15 @@
           </div>
 
           <div class="section-title">
-            <h3>🔥 Deals of the Day</h3>
-            <span>Limited time</span>
-          </div>
-          <div class="promo-scroll">
-            <div class="promo-card yellow" onclick="document.querySelector('[data-target=deals]').click()">
-              <div class="promo-tag">⚡ Flash deal</div>
-              <div class="promo-title">Buy 2 Dairy,<br>Save ฿30</div>
-              <div class="promo-sub">Mix &amp; match any dairy. Today only while stocks last.</div>
-              <div class="promo-cta">Shop now →</div>
-              <div class="promo-deco">🥛</div>
-            </div>
-            <div class="promo-card green" onclick="document.querySelector('[data-target=deals]').click()">
-              <div class="promo-tag">🌿 Green deal</div>
-              <div class="promo-title">Bakery Ends<br>Tonight</div>
-              <div class="promo-sub">All freshly baked goods up to 37% off — selling fast.</div>
-              <div class="promo-cta">See bakery →</div>
-              <div class="promo-deco">🥐</div>
-            </div>
-            <div class="promo-card orange" onclick="document.querySelector('[data-target=deals]').click()">
-              <div class="promo-tag">🔴 Last chance</div>
-              <div class="promo-title">Meat Deals<br>Ending Soon</div>
-              <div class="promo-sub">Chicken Breast Pack — only 9 units left at ฿115.</div>
-              <div class="promo-cta">Grab it →</div>
-              <div class="promo-deco">🍗</div>
-            </div>
-            <div class="promo-card blue" onclick="document.querySelector('[data-target=deals]').click()">
-              <div class="promo-tag">🍓 Fresh picks</div>
-              <div class="promo-title">Produce Up to<br>28% Off</div>
-              <div class="promo-sub">Strawberries &amp; more — great quality, lower price.</div>
-              <div class="promo-cta">Browse →</div>
-              <div class="promo-deco">🍓</div>
-            </div>
-          </div>
-
-          <div class="section-title" style="margin-top:14px;">
             <h3>Quick categories</h3>
             <span>Best near expiry</span>
           </div>
           <div class="chips">
-            <div class="chip home-chip active" data-filter="All">All</div>
-            <div class="chip home-chip" data-filter="Bakery">Bakery</div>
-            <div class="chip home-chip" data-filter="Dairy">Dairy</div>
-            <div class="chip home-chip" data-filter="Meat">Meat</div>
-            <div class="chip home-chip" data-filter="Produce">Produce</div>
+            <div class="chip active">🧺 All</div>
+            <div class="chip">🥐 Bakery</div>
+            <div class="chip">🥛 Dairy</div>
+            <div class="chip">🍖 Meat</div>
+            <div class="chip">🥦 Produce</div>
           </div>
 
           <div class="section-title">
@@ -1922,18 +1503,14 @@
 
         <section class="section" id="deals">
           <div class="section-title">
-            <h3>🔴 Live deals</h3>
+            <h3>Live deals</h3>
             <span id="dealCount">0 active</span>
           </div>
-          <div class="live-ticker">
-            <span class="ticker-dot"></span>
-            <span id="tickerText">Prices updating live · 7 deals active now</span>
-          </div>
           <div class="chips">
-            <div class="chip deals-chip active" data-filter="all">Nearest Branch</div>
-            <div class="chip deals-chip" data-filter="today">Today Only</div>
-            <div class="chip deals-chip" data-filter="ending">Ends Soon</div>
-            <div class="chip deals-chip" data-filter="high">High Discount</div>
+            <div class="chip active">Nearest branch</div>
+            <div class="chip">Today only</div>
+            <div class="chip">Ends soon</div>
+            <div class="chip">High discount</div>
           </div>
           <div class="deal-list" id="allDeals"></div>
         </section>
@@ -1949,6 +1526,18 @@
                 <div style="font-weight:800;">Align product inside the frame</div>
                 <div class="muted" style="margin-top:6px;">Live ESL / barcode reading preview</div>
               </div>
+            </div>
+            <div style="margin-top:12px; display:flex; gap:10px; align-items:center;">
+              <input id="scanInput" type="text" placeholder="Enter barcode / product name" style="flex:1; padding:10px 12px; border-radius:16px; border:1px solid rgba(137,116,34,.18);" />
+              <button id="scanBtn" class="btn primary" style="padding:10px 14px; font-size:13px;">Scan</button>
+            </div>
+            <div id="scanResult" style="margin-top:12px; color:var(--muted); font-size:13px;">Enter a barcode or product name, then click Scan to see matching deal details.</div>
+            <div class="mt-4" style="border-top:1px solid rgba(137,116,34,.2); padding-top:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <div style="font-weight:800; font-size:13px;">Scan history</div>
+                <button id="clearScanHistory" style="font-size:11px; color:var(--muted); background:none; border:none; cursor:pointer;">Clear</button>
+              </div>
+              <div id="scanHistory" style="display:flex; flex-direction:column; gap:8px;"></div>
             </div>
           </div>
 
@@ -1985,7 +1574,7 @@
 
         <section class="section" id="saved">
           <div class="section-title">
-            <h3>🔖 Saved items</h3>
+            <h3>Saved items</h3>
             <span>3 tracked</span>
           </div>
           <div class="card">
@@ -2068,7 +1657,7 @@
         <button class="nav-btn active" data-target="home"><span class="nav-ico">🏠</span><span>Home</span></button>
         <button class="nav-btn" data-target="deals"><span class="nav-ico">🏷️</span><span>Deals</span></button>
         <button class="nav-btn" data-target="scan"><span class="nav-ico">📷</span><span>Scan</span></button>
-        <button class="nav-btn" data-target="saved"><span class="nav-ico">🔖</span><span>Saved</span></button>
+        <button class="nav-btn" data-target="saved"><span class="nav-ico">💛</span><span>Saved</span></button>
         <button class="nav-btn" data-target="profile"><span class="nav-ico">👤</span><span>Profile</span></button>
       </div>
     </div>
@@ -2151,16 +1740,6 @@
               </div>
             </div>
           </div>
-          <!-- Promo / Discount Code -->
-          <div class="promo-code-section">
-            <div class="promo-code-label">🏷️ Promo Code</div>
-            <div class="promo-code-row">
-              <input type="text" id="promoCodeInput" class="promo-code-input" placeholder="Enter code e.g. FRESH20">
-              <button class="promo-code-btn" id="promoApplyBtn">Apply</button>
-            </div>
-            <div class="promo-code-msg" id="promoMsg"></div>
-          </div>
-
           <div class="payment-summary">
             <div class="payment-summary-row">
               <span>Items:</span>
@@ -2169,10 +1748,6 @@
             <div class="payment-summary-row">
               <span>Subtotal:</span>
               <span id="paymentSubtotal">฿0</span>
-            </div>
-            <div class="payment-summary-row promo-discount-row" id="promoDiscountRow" style="display:none;">
-              <span id="promoDiscountLabel">Promo discount:</span>
-              <span id="promoDiscountAmount" style="color:var(--success); font-weight:800;">-฿0</span>
             </div>
             <div class="payment-summary-row">
               <span>Delivery Fee:</span>
@@ -2256,98 +1831,6 @@
         <div class="small-note">Prototype note: in a real deployment, these prices would come from store systems, shelf labels, inventory data, and expiry-date records.</div>
       </div>
     </div>
-
-    <!-- Location Picker Modal -->
-    <div class="location-modal" id="locationModal">
-      <div class="location-sheet">
-        <div class="sheet-handle"></div>
-        <div class="location-header">
-          <h3>📍 Choose Branch</h3>
-          <button class="location-close" onclick="closeLocationModal()">✕</button>
-        </div>
-
-        <button class="locate-me-btn" id="locateMeBtn" onclick="locateMe()">
-          <span>🎯</span> <span id="locateMeText">Use my current location</span>
-        </button>
-
-        <div class="branch-group-label">Bangkok — Central</div>
-        <div class="branch-item selected" data-branch="Rama 1" onclick="selectBranch(this)">
-          <div class="branch-icon">🏬</div>
-          <div class="branch-info">
-            <div class="branch-name">Rama 1 Branch</div>
-            <div class="branch-address">Siam Square, Pathum Wan, Bangkok</div>
-            <div class="branch-promo">🏷️ 🎁 3 flash deals today · up to -37%</div>
-          </div>
-          <div class="branch-distance" id="dist-rama1">2.1 km</div>
-          <div class="branch-check">✓</div>
-        </div>
-        <div class="branch-item" data-branch="Silom" onclick="selectBranch(this)">
-          <div class="branch-icon">🏬</div>
-          <div class="branch-info">
-            <div class="branch-name">Silom Branch</div>
-            <div class="branch-address">Silom Rd, Bang Rak, Bangkok</div>
-            <div class="branch-promo">🏷️ 🥩 Meat &amp; Dairy special this week</div>
-          </div>
-          <div class="branch-distance" id="dist-silom">3.5 km</div>
-          <div class="branch-check">✓</div>
-        </div>
-        <div class="branch-item" data-branch="Asok" onclick="selectBranch(this)">
-          <div class="branch-icon">🏬</div>
-          <div class="branch-info">
-            <div class="branch-name">Asok Branch</div>
-            <div class="branch-address">Sukhumvit 21, Watthana, Bangkok</div>
-            <div class="branch-promo">🏷️ 🥐 Bakery clearance from 5 PM daily</div>
-          </div>
-          <div class="branch-distance" id="dist-asok">4.8 km</div>
-          <div class="branch-check">✓</div>
-        </div>
-
-        <div class="branch-group-label" style="margin-top:14px;">Bangkok — North</div>
-        <div class="branch-item" data-branch="Chatuchak" onclick="selectBranch(this)">
-          <div class="branch-icon">🏬</div>
-          <div class="branch-info">
-            <div class="branch-name">Chatuchak Branch</div>
-            <div class="branch-address">Kamphaeng Phet 2 Rd, Chatuchak, Bangkok</div>
-            <div class="branch-promo">🏷️ 🍓 Fresh produce deals every morning</div>
-          </div>
-          <div class="branch-distance" id="dist-chatuchak">6.3 km</div>
-          <div class="branch-check">✓</div>
-        </div>
-        <div class="branch-item" data-branch="Lat Phrao" onclick="selectBranch(this)">
-          <div class="branch-icon">🏬</div>
-          <div class="branch-info">
-            <div class="branch-name">Lat Phrao Branch</div>
-            <div class="branch-address">Lat Phrao Rd, Wang Thonglang, Bangkok</div>
-            <div class="branch-promo">🏷️ 💚 Buy 2 get 1 — near-expiry yogurt</div>
-          </div>
-          <div class="branch-distance" id="dist-latphrao">7.9 km</div>
-          <div class="branch-check">✓</div>
-        </div>
-
-        <div class="branch-group-label" style="margin-top:14px;">Bangkok — East</div>
-        <div class="branch-item" data-branch="On Nut" onclick="selectBranch(this)">
-          <div class="branch-icon">🏬</div>
-          <div class="branch-info">
-            <div class="branch-name">On Nut Branch</div>
-            <div class="branch-address">Sukhumvit 77, Phra Khanong, Bangkok</div>
-            <div class="branch-promo">🏷️ 🔔 Evening markdowns from 6 PM daily</div>
-          </div>
-          <div class="branch-distance" id="dist-onnut">9.1 km</div>
-          <div class="branch-check">✓</div>
-        </div>
-        <div class="branch-item" data-branch="Bangna" onclick="selectBranch(this)">
-          <div class="branch-icon">🏬</div>
-          <div class="branch-info">
-            <div class="branch-name">Bangna Branch</div>
-            <div class="branch-address">Bangna-Trat Rd, Bang Na, Bangkok</div>
-            <div class="branch-promo">🏷️ 🛒 Weekend bundle deals — save ฿50+</div>
-          </div>
-          <div class="branch-distance" id="dist-bangna">12.4 km</div>
-          <div class="branch-check">✓</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <script>
@@ -2356,7 +1839,7 @@
         id: 1,
         name: "Greek Yogurt 500g",
         emoji: "🥣",
-        image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&h=200&fit=crop&auto=format",
+        image: "https://images.unsplash.com/photo-1514516870923-05161e9cbb53?auto=format&fit=crop&w=500&q=60",
         category: "Dairy",
         original: 95,
         current: 69,
@@ -2382,7 +1865,7 @@
         id: 2,
         name: "Fresh Milk 1L",
         emoji: "🥛",
-        image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=200&h=200&fit=crop&auto=format",
+        image: "https://images.unsplash.com/photo-1524593412076-0e8e1f4a90a7?auto=format&fit=crop&w=500&q=60",
         category: "Dairy",
         original: 58,
         current: 45,
@@ -2407,7 +1890,7 @@
         id: 3,
         name: "Chicken Breast Pack",
         emoji: "🍗",
-        image: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=200&h=200&fit=crop&auto=format",
+        image: "https://images.unsplash.com/photo-1604908177484-d5a2d87b4553?auto=format&fit=crop&w=500&q=60",
         category: "Meat",
         original: 149,
         current: 115,
@@ -2433,7 +1916,7 @@
         id: 4,
         name: "Sourdough Bread",
         emoji: "🍞",
-        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop&auto=format",
+        image: "https://images.unsplash.com/photo-1548365328-8fe8cacbe808?auto=format&fit=crop&w=500&q=60",
         category: "Bakery",
         original: 78,
         current: 49,
@@ -2459,7 +1942,7 @@
         id: 5,
         name: "Strawberries Box",
         emoji: "🍓",
-        image: "https://images.unsplash.com/photo-1518635017498-87f514b751ba?w=200&h=200&fit=crop&auto=format",
+        image: "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=500&q=60",
         category: "Produce",
         original: 109,
         current: 79,
@@ -2480,58 +1963,6 @@
           { date: "2026-02-13", price: 79, stock: 14 },
           { date: "2026-02-14", price: 65, stock: 7 }
         ]
-      },
-      {
-        id: 6,
-        name: "Butter Croissant 4pcs",
-        emoji: "🥐",
-        image: "https://images.unsplash.com/photo-1623334044303-241021148842?w=200&h=200&fit=crop&auto=format",
-        category: "Bakery",
-        original: 89,
-        current: 59,
-        discount: 34,
-        expiry: "2026-04-01",
-        timeLeft: "Ends today",
-        stock: 8,
-        safety: "Baked today",
-        badgeText: "-34%",
-        badgeClass: "warn",
-        location: "Bakery counter · Rack 3",
-        reason: "Croissants are freshest on the day of baking and lose quality overnight. The system applies a steep same-day markdown in the afternoon to ensure full sell-through before closing time.",
-        trust: "Freshly baked this morning",
-        timeline: [
-          { date: "2026-04-01 08:00", price: 89, stock: 4 },
-          { date: "2026-04-01 11:00", price: 79, stock: 6 },
-          { date: "2026-04-01 14:00", price: 69, stock: 7 },
-          { date: "2026-04-01 17:00", price: 59, stock: 8 },
-          { date: "2026-04-01 19:00", price: 45, stock: 3 }
-        ]
-      },
-      {
-        id: 7,
-        name: "Cinnamon Roll 2pcs",
-        emoji: "🍩",
-        image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=200&h=200&fit=crop&auto=format",
-        category: "Bakery",
-        original: 72,
-        current: 48,
-        discount: 33,
-        expiry: "2026-04-01",
-        timeLeft: "Ends today",
-        stock: 5,
-        safety: "Baked today",
-        badgeText: "-33%",
-        badgeClass: "warn",
-        location: "Bakery counter · Rack 4",
-        reason: "Cinnamon rolls are best consumed within hours of baking. The discount accelerates in the second half of the day as freshness window narrows and sell-through probability drops without a price incentive.",
-        trust: "Made in-store today",
-        timeline: [
-          { date: "2026-04-01 09:00", price: 72, stock: 3 },
-          { date: "2026-04-01 12:00", price: 64, stock: 4 },
-          { date: "2026-04-01 15:00", price: 56, stock: 5 },
-          { date: "2026-04-01 18:00", price: 48, stock: 5 },
-          { date: "2026-04-01 20:00", price: 35, stock: 2 }
-        ]
       }
     ];
 
@@ -2543,18 +1974,29 @@
       return name === "ok" ? "badge ok" : name === "warn" ? "badge warn" : "badge soft";
     }
 
+    function getExpiryLabel(expiry) {
+      const exp = new Date(expiry);
+      const now = new Date();
+      const days = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
+      if (days <= 0) return "Expires today";
+      if (days === 1) return "1 day left";
+      return `${days} days left`;
+    }
+
     function createDealCard(product){
+      const expiryLabel = getExpiryLabel(product.expiry);
       const div = document.createElement("div");
       div.className = "deal-card";
-      div.dataset.category = product.category;
-      div.dataset.productId = product.id;
       div.innerHTML = `
-        <div class="thumb"><img src="${product.image}" alt="${product.name}" onerror="this.parentElement.textContent='${product.emoji}'"></div>
+        <div class="thumb">
+          <img class="thumb-img" src="${product.image}" alt="${product.name}" />
+          <div class="thumb-emoji">${product.emoji}</div>
+        </div>
         <div class="deal-main">
           <div class="deal-top">
             <div>
               <div class="deal-name">${product.name}</div>
-              <div class="deal-meta">${product.category} · ${product.location}<br>${product.trust}</div>
+              <div class="deal-meta">${product.category} · ${product.location}<br><span style="font-weight:700;">${expiryLabel}</span> · ฿${product.current}</div>
             </div>
             <div class="${badgeClassName(product.badgeClass)}">${product.badgeText}</div>
           </div>
@@ -2580,8 +2022,45 @@
       return div;
     }
 
-    products.forEach(p => featuredDeals.appendChild(createDealCard(p)));
-    products.forEach(p => allDeals.appendChild(createDealCard(p)));
+    function getCategoryFromChipText(text) {
+      // Chips include an emoji, so remove it (e.g. "🥐 Bakery" -> "Bakery")
+      return text.trim().split(" ").slice(1).join(" ") || text.trim();
+    }
+
+    function renderFeaturedDeals(category = "All") {
+      featuredDeals.innerHTML = "";
+      let filtered = products;
+      const normalizedCategory = getCategoryFromChipText(category);
+
+      if (normalizedCategory && normalizedCategory !== "All") {
+        filtered = products.filter(p => p.category === normalizedCategory);
+      }
+
+      const toShow = filtered.slice(0, 3);
+      if (toShow.length === 0) {
+        featuredDeals.innerHTML = `<div style="padding:16px; color:var(--muted); font-size:13px;">No deals in this category right now.</div>`;
+      } else {
+        toShow.forEach(p => featuredDeals.appendChild(createDealCard(p)));
+      }
+    }
+
+    function renderAllDeals(category = "All") {
+      allDeals.innerHTML = "";
+      const normalizedCategory = getCategoryFromChipText(category);
+      const filtered = (normalizedCategory && normalizedCategory !== "All")
+        ? products.filter(p => p.category === normalizedCategory)
+        : products;
+
+      if (filtered.length === 0) {
+        allDeals.innerHTML = `<div style="padding:16px; color:var(--muted); font-size:13px;">No deals found for this filter.</div>`;
+      } else {
+        filtered.forEach(p => allDeals.appendChild(createDealCard(p)));
+      }
+    }
+
+    // Populate lists
+    renderFeaturedDeals();
+    renderAllDeals();
     dealCount.textContent = `${products.length} active`;
 
     const navBtns = document.querySelectorAll(".nav-btn");
@@ -2606,13 +2085,13 @@
       if (existingIndex > -1) {
         // Remove from saved
         savedItems.splice(existingIndex, 1);
-        button.innerHTML = "🔖";
+        button.innerHTML = "🤍";
         button.classList.remove("saved");
         showBasketNotification(`Removed ${product.name} from saved`);
       } else {
         // Add to saved
         savedItems.push(product);
-        button.innerHTML = "🔖";
+        button.innerHTML = "💛";
         button.classList.add("saved");
         showBasketNotification(`Saved ${product.name} to wishlist`);
       }
@@ -2635,7 +2114,7 @@
       cardContainer.innerHTML = "";
       
       if (savedItems.length === 0) {
-        cardContainer.innerHTML = `<div style="padding:20px; text-align:center; color:var(--muted);">No saved items yet 🔖</div>`;
+        cardContainer.innerHTML = `<div style="padding:20px; text-align:center; color:var(--muted);">No saved items yet 💛</div>`;
       } else {
         savedItems.forEach(item => {
           const priceReduction = ((item.original - item.current) / item.original * 100).toFixed(0);
@@ -2683,86 +2162,12 @@
       paymentConfirmBtn.disabled = true;
     });
 
-    // ── Promo / Discount Code Logic ──────────────────────────────
-    const promoCodes = {
-      "FRESH20":  { type: "percent", value: 20, label: "FRESH20 (20% off)" },
-      "SAVE30":   { type: "fixed",   value: 30, label: "SAVE30 (฿30 off)" },
-      "BAKERY15": { type: "percent", value: 15, label: "BAKERY15 (15% off)" },
-      "WELCOME50":{ type: "fixed",   value: 50, label: "WELCOME50 (฿50 off)" },
-      "ECO10":    { type: "percent", value: 10, label: "ECO10 (10% off)" },
-    };
-
-    let appliedPromo = null;
-
-    function getSubtotal() {
-      return basket.reduce((sum, item) => sum + (item.current * item.quantity), 0);
-    }
-
-    function getDiscount(subtotal) {
-      if (!appliedPromo) return 0;
-      if (appliedPromo.type === "percent") return Math.round(subtotal * appliedPromo.value / 100);
-      if (appliedPromo.type === "fixed")   return Math.min(appliedPromo.value, subtotal);
-      return 0;
-    }
-
-    function updatePaymentSummary() {
-      const subtotal = getSubtotal();
-      const discount = getDiscount(subtotal);
-      const total = subtotal - discount;
-      const itemCount = basket.reduce((sum, item) => sum + item.quantity, 0);
-
-      document.getElementById("paymentItemCount").textContent  = itemCount;
-      document.getElementById("paymentSubtotal").textContent   = `฿${subtotal}`;
-      document.getElementById("paymentTotal").textContent      = `฿${total}`;
-
-      const discRow   = document.getElementById("promoDiscountRow");
-      const discAmt   = document.getElementById("promoDiscountAmount");
-      const discLabel = document.getElementById("promoDiscountLabel");
-      if (appliedPromo && discount > 0) {
-        discRow.style.display = "flex";
-        discLabel.textContent = `${appliedPromo.label}:`;
-        discAmt.textContent   = `-฿${discount}`;
-      } else {
-        discRow.style.display = "none";
-      }
-    }
-
-    document.getElementById("promoApplyBtn").addEventListener("click", () => {
-      const code = document.getElementById("promoCodeInput").value.trim().toUpperCase();
-      const msg  = document.getElementById("promoMsg");
-
-      if (!code) {
-        msg.textContent = "Please enter a promo code.";
-        msg.className   = "promo-code-msg err";
-        return;
-      }
-
-      if (promoCodes[code]) {
-        appliedPromo = { ...promoCodes[code] };
-        msg.textContent = `✓ ${appliedPromo.label} applied!`;
-        msg.className   = "promo-code-msg ok";
-        updatePaymentSummary();
-      } else {
-        appliedPromo = null;
-        msg.textContent = "✗ Invalid promo code. Try FRESH20 or SAVE30.";
-        msg.className   = "promo-code-msg err";
-        updatePaymentSummary();
-      }
-    });
-
-    // Allow pressing Enter in promo input
-    document.getElementById("promoCodeInput").addEventListener("keydown", (e) => {
-      if (e.key === "Enter") document.getElementById("promoApplyBtn").click();
-    });
-
     paymentConfirmBtn.addEventListener("click", () => {
       if (!selectedPaymentMethod) return;
-
-      const subtotal  = getSubtotal();
-      const discount  = getDiscount(subtotal);
-      const total     = subtotal - discount;
+      
+      const total = basket.reduce((sum, item) => sum + (item.current * item.quantity), 0);
       const itemNames = basket.map(item => `${item.name} (${item.quantity}x)`).join(", ");
-
+      
       const paymentMethodNames = {
         promptpay: "PromptPay",
         truemoney: "TrueMoney Wallet",
@@ -2770,16 +2175,10 @@
         bank: "Bank Transfer",
         card: "Credit/Debit Card"
       };
-
-      const discountLine = discount > 0 ? `\nPromo discount: -฿${discount}` : "";
-      alert(`✓ Order Confirmed!\n\n${itemNames}\n\nSubtotal: ฿${subtotal}${discountLine}\nTotal: ฿${total}\nPayment: ${paymentMethodNames[selectedPaymentMethod]}\n\nThank you for shopping with FreshSave!`);
-
+      
+      alert(`✓ Order Confirmed!\n\n${itemNames}\n\nTotal: ฿${total}\nPayment: ${paymentMethodNames[selectedPaymentMethod]}\n\nThank you for shopping with FreshSave!`);
+      
       basket = [];
-      appliedPromo = null;
-      document.getElementById("promoCodeInput").value = "";
-      document.getElementById("promoMsg").textContent  = "";
-      document.getElementById("promoMsg").className    = "promo-code-msg";
-      document.getElementById("promoDiscountRow").style.display = "none";
       updateBasketCount();
       paymentModal.classList.remove("open");
       checkoutModal.classList.remove("open");
@@ -2892,7 +2291,9 @@
       const itemCount = basket.reduce((sum, item) => sum + item.quantity, 0);
       const total = basket.reduce((sum, item) => sum + (item.current * item.quantity), 0);
       
-      updatePaymentSummary();
+      document.getElementById("paymentItemCount").textContent = itemCount;
+      document.getElementById("paymentSubtotal").textContent = `฿${total}`;
+      document.getElementById("paymentTotal").textContent = `฿${total}`;
       
       // Open payment modal and close checkout modal
       checkoutModal.classList.remove("open");
@@ -2933,7 +2334,7 @@
         itemDiv.className = "checkout-item";
         itemDiv.style.borderLeft = "4px solid var(--accent)";
         itemDiv.innerHTML = `
-          <div class="checkout-item-emoji"><img src="${item.image}" alt="${item.name}" onerror="this.parentElement.textContent='${item.emoji}'"></div>
+          <div class="checkout-item-emoji">${item.emoji}</div>
           <div class="checkout-item-details">
             <div class="checkout-item-name">${item.name}</div>
             <div style="font-size:11px; font-weight:700; color:var(--accent); margin-bottom:4px;">${lotLabel}</div>
@@ -3041,95 +2442,117 @@
       });
     }
 
-    // ── Home chips: filter #featuredDeals by category ──────────
-    document.querySelectorAll(".home-chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        document.querySelectorAll(".home-chip").forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        const filter = chip.dataset.filter;
-        document.querySelectorAll("#featuredDeals .deal-card").forEach(card => {
-          card.style.display = (filter === "All" || card.dataset.category === filter) ? "flex" : "none";
-        });
-      });
-    });
+    // Scan / barcode input functionality
+    const scanInput = document.getElementById("scanInput");
+    const scanBtn = document.getElementById("scanBtn");
+    const scanResult = document.getElementById("scanResult");
+    const scanHistoryContainer = document.getElementById("scanHistory");
+    const clearScanHistoryBtn = document.getElementById("clearScanHistory");
+    let scanHistory = [];
 
-    // ── Deals chips: filter/sort #allDeals with animation ────────
-    // tag each product with filter flags
-    const todayIds   = [4, 6, 7];          // Bakery — same-day expiry
-    const endingIds  = [3, 4, 6, 7];       // low stock / last-day
-    const highIds    = [4, 6, 5, 7];       // discount >= 28%
-
-    function filterDeals(filter) {
-      const cards = Array.from(document.querySelectorAll("#allDeals .deal-card"));
-      cards.forEach(card => {
-        const id = parseInt(card.dataset.productId);
-        let show = false;
-        if (filter === "all")    show = true;
-        if (filter === "today")  show = todayIds.includes(id);
-        if (filter === "ending") show = endingIds.includes(id);
-        if (filter === "high")   show = highIds.includes(id);
-
-        if (!show) {
-          card.classList.add("hiding");
-        }
-      });
-      setTimeout(() => {
-        cards.forEach(card => {
-          const id = parseInt(card.dataset.productId);
-          let show = false;
-          if (filter === "all")    show = true;
-          if (filter === "today")  show = todayIds.includes(id);
-          if (filter === "ending") show = endingIds.includes(id);
-          if (filter === "high")   show = highIds.includes(id);
-          card.style.display = show ? "flex" : "none";
-          card.classList.remove("hiding");
-        });
-      }, 240);
+    function showScanResult(message, highlight = false) {
+      scanResult.textContent = message;
+      scanResult.style.color = highlight ? "var(--text)" : "var(--muted)";
     }
 
-    document.querySelectorAll(".deals-chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        document.querySelectorAll(".deals-chip").forEach(c => c.classList.remove("active"));
-        chip.classList.add("active");
-        filterDeals(chip.dataset.filter);
-      });
-    });
-
-    // ── Live ticker ───────────────────────────────────────────────
-    const tickerMessages = [
-      "Prices updating live · 7 deals active now",
-      "🔴 Sourdough just dropped ฿10 — ends tonight",
-      "📦 Chicken Breast: only 9 units left in stock",
-      "⚡ New markdown: Cinnamon Roll now ฿48",
-      "🕐 Croissant price drops again at 7:00 PM",
-      "🍓 Strawberries: price may fall in 2 hours",
-      "✅ 4 items sold in the last 15 minutes",
-      "🔔 Fresh Milk nearing best-before — grab it now",
-    ];
-    let tickerIdx = 0;
-    const tickerEl = document.getElementById("tickerText");
-    if (tickerEl) {
-      setInterval(() => {
-        tickerEl.style.opacity = "0";
-        tickerEl.style.transition = "opacity .35s ease";
-        setTimeout(() => {
-          tickerIdx = (tickerIdx + 1) % tickerMessages.length;
-          tickerEl.textContent = tickerMessages[tickerIdx];
-          tickerEl.style.opacity = "1";
-        }, 360);
-      }, 3500);
+    function formatScanEntry(product) {
+      const expiry = product.expiry;
+      const daysLeft = Math.max(0, Math.ceil((new Date(expiry) - new Date()) / (1000 * 60 * 60 * 24)));
+      const expiresText = daysLeft <= 0 ? "Expires today" : `${daysLeft}d left`;
+      return `${product.emoji} ${product.name} • ${expiresText} • ฿${product.current}`;
     }
 
-    // ── Random price flash on deals cards ────────────────────────
-    setInterval(() => {
-      const priceEls = document.querySelectorAll("#allDeals .price-now");
-      if (!priceEls.length) return;
-      const el = priceEls[Math.floor(Math.random() * priceEls.length)];
-      el.style.transition = "color .3s ease, transform .3s ease";
-      el.style.color = "#D87752";
-      el.style.transform = "scale(1.1)";
-      setTimeout(() => { el.style.color = ""; el.style.transform = ""; }, 600);
-    }, 2800);
+    function renderScanHistory() {
+      scanHistoryContainer.innerHTML = "";
+      if (scanHistory.length === 0) {
+        scanHistoryContainer.innerHTML = `<div style="font-size:12px; color:var(--muted);">No scans yet.</div>`;
+        return;
+      }
+
+      scanHistory.slice(0, 5).forEach(entry => {
+        const row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.justifyContent = "space-between";
+        row.style.alignItems = "center";
+        row.style.padding = "8px 10px";
+        row.style.background = "rgba(255,255,255,.7)";
+        row.style.borderRadius = "14px";
+        row.style.border = "1px solid rgba(137,116,34,.15)";
+        row.style.cursor = "pointer";
+
+        const label = document.createElement("div");
+        label.style.fontSize = "12px";
+        label.style.color = "var(--text)";
+        label.textContent = formatScanEntry(entry);
+
+        const time = document.createElement("div");
+        time.style.fontSize = "10px";
+        time.style.color = "var(--muted)";
+        time.textContent = entry.time;
+
+        row.appendChild(label);
+        row.appendChild(time);
+
+        row.addEventListener("click", () => {
+          openProduct(entry.product.id);
+        });
+
+        scanHistoryContainer.appendChild(row);
+      });
+    }
+
+    clearScanHistoryBtn.addEventListener("click", () => {
+      scanHistory = [];
+      renderScanHistory();
+    });
+
+    function scanProduct() {
+      const query = scanInput.value.trim();
+      if (!query) {
+        showScanResult("Enter a barcode or product name to scan.");
+        return;
+      }
+
+      // Allow scanning by numeric ID or by name
+      const matched = products.find(p => {
+        return p.id.toString() === query ||
+               p.name.toLowerCase() === query.toLowerCase();
+      });
+
+      if (!matched) {
+        showScanResult(`No product found for \"${query}\". Try name or ID.`);
+        return;
+      }
+
+      // Add to history
+      scanHistory.unshift({
+        product: matched,
+        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
+      });
+      if (scanHistory.length > 10) scanHistory.pop();
+      renderScanHistory();
+
+      // Show details in scan section and open detail modal
+      showScanResult(`Found ${matched.name} — Expiry ${matched.expiry} · Price ฿${matched.current} (Orig ฿${matched.original})`, true);
+      openProduct(matched.id);
+    }
+
+    scanBtn.addEventListener("click", scanProduct);
+    scanInput.addEventListener("keyup", (e) => {
+      if (e.key === "Enter") scanProduct();
+    });
+
+    // Quick categories chips functionality
+    const categoryChips = document.querySelectorAll("#home .chips .chip");
+    categoryChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        categoryChips.forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        const categoryText = chip.textContent.trim();
+        renderFeaturedDeals(categoryText);
+        renderAllDeals(categoryText);
+      });
+    });
 
     const modal = document.getElementById("productModal");
     const closeModalBtn = document.getElementById("closeModalBtn");
@@ -3144,7 +2567,7 @@
       const product = products.find(p => p.id === id);
       if(!product) return;
 
-      document.getElementById("detailEmoji").innerHTML = `<img src="${product.image}" alt="${product.name}" onerror="this.parentElement.textContent='${product.emoji}'">`;
+      document.getElementById("detailEmoji").textContent = product.emoji;
       document.getElementById("detailName").textContent = product.name;
       document.getElementById("detailMeta").textContent = `${product.category} · ${product.location} · Expiry ${product.expiry}`;
       document.getElementById("detailCurrent").textContent = `฿${product.current}`;
@@ -3332,93 +2755,8 @@
     }
 
     openProduct(1);
+    renderScanHistory();
     modal.classList.remove("open");
-
-    // ── Location picker ──────────────────────────────────────────
-    const branches = {
-      "Rama 1":    { lat: 13.7462, lng: 100.5330 },
-      "Silom":     { lat: 13.7233, lng: 100.5289 },
-      "Asok":      { lat: 13.7380, lng: 100.5607 },
-      "Chatuchak": { lat: 13.7999, lng: 100.5500 },
-      "Lat Phrao": { lat: 13.8053, lng: 100.5753 },
-      "On Nut":    { lat: 13.7020, lng: 100.5993 },
-      "Bangna":    { lat: 13.6713, lng: 100.5999 }
-    };
-
-    const distIds = {
-      "Rama 1": "dist-rama1", "Silom": "dist-silom", "Asok": "dist-asok",
-      "Chatuchak": "dist-chatuchak", "Lat Phrao": "dist-latphrao",
-      "On Nut": "dist-onnut", "Bangna": "dist-bangna"
-    };
-
-    function haversine(lat1, lng1, lat2, lng2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLng = (lng2 - lng1) * Math.PI / 180;
-      const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-    }
-
-    function openLocationModal() {
-      document.getElementById("locationModal").classList.add("open");
-    }
-
-    function closeLocationModal() {
-      document.getElementById("locationModal").classList.remove("open");
-    }
-
-    document.getElementById("locationModal").addEventListener("click", function(e) {
-      if (e.target === this) closeLocationModal();
-    });
-
-    function selectBranch(el) {
-      document.querySelectorAll(".branch-item").forEach(b => b.classList.remove("selected"));
-      el.classList.add("selected");
-      const name = el.dataset.branch;
-      document.getElementById("branchPillText").textContent = name + " Branch";
-      setTimeout(closeLocationModal, 220);
-    }
-
-    function locateMe() {
-      if (!navigator.geolocation) {
-        document.getElementById("locateMeText").textContent = "Geolocation not supported";
-        return;
-      }
-      const btn = document.getElementById("locateMeBtn");
-      document.getElementById("locateMeText").innerHTML = '<span class="locating-spinner"></span> Locating…';
-      btn.disabled = true;
-
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const { latitude: lat, longitude: lng } = pos.coords;
-          let nearest = null, minDist = Infinity;
-
-          Object.entries(branches).forEach(([name, coords]) => {
-            const d = haversine(lat, lng, coords.lat, coords.lng);
-            const el = document.getElementById(distIds[name]);
-            if (el) el.textContent = d.toFixed(1) + " km";
-            if (d < minDist) { minDist = d; nearest = name; }
-          });
-
-          document.getElementById("locateMeText").textContent = "Use my current location";
-          btn.disabled = false;
-
-          if (nearest) {
-            const target = document.querySelector(`.branch-item[data-branch="${nearest}"]`);
-            if (target) {
-              selectBranch(target);
-              target.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
-          }
-        },
-        () => {
-          document.getElementById("locateMeText").textContent = "Could not get location";
-          btn.disabled = false;
-          setTimeout(() => { document.getElementById("locateMeText").textContent = "Use my current location"; }, 2500);
-        },
-        { timeout: 8000 }
-      );
-    }
   </script>
 </body>
 </html>
